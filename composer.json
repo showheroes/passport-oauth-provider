@@ -1,0 +1,31 @@
+{
+    "name": "showheroes/passport-oauth-provider",
+    "description": "Handles ShowHeroes Passport authorisation.",
+    "keywords": ["passport", "showheroes", "oauth", "client", "auth"],
+    "license": "ShowHeroes",
+    "authors": [
+        {
+            "name": "Timofey Semenenko",
+            "email": "timofey.semenenko@showheroes.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0|^7.3",
+        "laravel/socialite": ">=3.0"
+    },
+    "require-dev": {
+        "illuminate/config": "^5.0,<5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "ShowHeroes\\PassportOAuthProvider\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ShowHeroes\\PassportOAuthProvider\\PassportOAuthServiceProvider"
+            ]
+        }
+    }
+}
