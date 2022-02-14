@@ -1,6 +1,6 @@
 Laravel 5, 7, 8, 9 ShowHeroes Passport OAuth Provider
 Server and client setup
-Server side requires use of Laravel Passport 2.0.
+Server side requires use of Laravel Passport 10.3.
 
 How to create authentication point (login and redirect), please, see IFactory project.
 
