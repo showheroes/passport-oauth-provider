@@ -53,7 +53,7 @@ Add Passport service configuration in config/services.php:
     ],
 
 Update .env file with client config variables:
-# Video Library OAuth2.0 client
+# PASSPORT OAuth2.0 client
 PASSPORT_OAUTH_SERVER=http://passport.showheroes.dev
 PASSPORT_CLIENT_ID=4
 PASSPORT_CLIENT_SECRET=PlaceHereSomeSuperSecretId
