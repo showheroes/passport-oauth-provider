@@ -2,6 +2,7 @@
 
 namespace ShowHeroes\PassportOAuthProvider;
 
+use Laravel\Socialite\Two\User;
 use Psr\Http\Message\StreamInterface;
 use Laravel\Socialite\Two\AbstractProvider;
 use Laravel\Socialite\Two\ProviderInterface;
@@ -32,7 +33,7 @@ class PassportOAuthClientProvider extends AbstractProvider implements ProviderIn
      */
     protected function getTokenUrl(): string
     {
-        return confug('services.passport.oauth_server') . '/oauth/token';
+        return config('services.passport.oauth_server') . '/oauth/token';
     }
 
     /**
@@ -61,7 +62,7 @@ class PassportOAuthClientProvider extends AbstractProvider implements ProviderIn
      * @param string $code
      * @return array
      */
-    protected function getTokenFields(string $code): array
+    protected function getTokenFields($code): array
     {
         return [
             'grant_type' => 'authorization_code',
@@ -81,7 +82,7 @@ class PassportOAuthClientProvider extends AbstractProvider implements ProviderIn
     {
         $response = $this->getHttpClient()
             ->get(
-                config('services.passport.oauth_server') . '/api/v1/oauth/user',
+                config('services.passport.oauth_server') . '/api/users/current',
                 [
                     'headers' => [
                         'Authorization' => 'Bearer ' . $token,
@@ -91,5 +92,19 @@ class PassportOAuthClientProvider extends AbstractProvider implements ProviderIn
             );
 
         return json_decode($response->getBody(), true)['data'] ?? [];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function mapUserToObject(array $user)
+    {
+        return (new User)->setRaw($user)->map([
+            'id'       => $user['id'],
+            'nickname' => $user['name'],
+            'email'    => $user['email'],
+            'name'     => $user['name'],
+            'avatar'   => $user['avatar'],
+        ]);
     }
 }
